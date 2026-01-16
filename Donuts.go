@@ -85,7 +85,9 @@ func main() {
 		
 		A += 0.04
 		B += 0.02
-		
+
+
+// how to run this -> go run Donuts.go
 
 		time.Sleep(30 * time.Millisecond)
 	}
