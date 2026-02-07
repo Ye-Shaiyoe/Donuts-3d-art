@@ -68,6 +68,44 @@ void setColor(int color) {
     printf("\033[%dm", color);
 }
 
+void initGame(Game *game) {
+    game->snake.length = 3;
+    game->snake.dir = RIGHT;
+
+    for (int i = 0; i < game->snake.length; i++) {
+        game->snake.x[i] = WIDTH / 2 - i;
+        game->snake.y[i] = HEIGHT / 2;
+    }
+
+    srand(time(NULL));
+    game->food.x = rand() % (WIDTH - 2) + 1;
+    game->food.y = rand() % (HEIGHT - 2) + 1;
+    
+    game->score = 0;
+    game->gameOver = 0;
+    game->speed = 100;
+}
+
+void drawBorder() {
+    setColor(36); // Cyan
+    for (int i = 0; i < WIDTH; i++) {
+        gotoxy(i, 0);
+        printf("═");
+        gotoxy(i, HEIGHT - 1);
+        printf("═");
+    }
+    for (int i = 0; i < HEIGHT; i++) {
+        gotoxy(0, i);
+        printf("║");
+        gotoxy(WIDTH - 1, i);
+        printf("║");
+    }
+    gotoxy(0, 0); printf("╔");
+    gotoxy(WIDTH - 1, 0); printf("╗");
+    gotoxy(0, HEIGHT - 1); printf("╚");
+    gotoxy(WIDTH - 1, HEIGHT - 1); printf("╝");
+}
+
 void clearScreen() {
     printf("\033[2J");
     printf("\033[H");
